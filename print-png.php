@@ -7,6 +7,6 @@ $ep = new esimPrint();
 
 array_shift($argv);
 foreach ($argv as $file) {
-	$ep->printPng($file);
+	echo $ep->printPng($file);
 }
 

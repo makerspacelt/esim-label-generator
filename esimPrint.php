@@ -58,7 +58,7 @@ class EsimPrint {
 
 	public function printPng($file)
 	{
-		$img=imageCreateFromPng($png_file);
+		$img=imageCreateFromPng($file);
 		return $this->printGd($img);
 	}
 }
