@@ -1,6 +1,6 @@
 <?php
 
-include "esim.php"
+include "esim.php";
 
 class EsimPrint {
 
@@ -11,7 +11,7 @@ class EsimPrint {
 		$this->esim = new Esim();
 	}
 
-	public setupPrinter($w, $h)
+	public function setupPrinter($w, $h)
 	{
 		$this->esim->density(15);
 		$this->esim->speedSelect(4);
@@ -24,7 +24,7 @@ class EsimPrint {
 		$this->esim->setFormLength($h,16);
 	}
 
-	public printGd($img)
+	public function printGd($img)
 	{
 		$w=imagesx($img);
 		$h=imagesy($img);
@@ -56,7 +56,7 @@ class EsimPrint {
 		return $this->esim->getData();
 	}
 
-	public printPng($file)
+	public function printPng($file)
 	{
 		$img=imageCreateFromPng($png_file);
 		return $this->printGd($img);

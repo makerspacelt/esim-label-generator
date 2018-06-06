@@ -30,7 +30,7 @@ class Esim {
 
 	# ===== Controll Commands
 	#
-	public function serialPortSetup($baud=96, $parity='N', $data=8. $stop=1)
+	public function serialPortSetup($baud=96, $parity='N', $data=8, $stop=1)
 	{
 		$this->send("Y$baud,$parity,$data,$stop");
 	}
