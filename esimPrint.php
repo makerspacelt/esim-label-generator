@@ -43,10 +43,12 @@ class EsimPrint {
 				$data_bit=$x%8;
 				if ($data_bit == 0 && !($x==0 && $y==0) ) {
 					$data.=chr($byte&0xFF);
-					$byte=0x00;
+					$byte=0xff;
 				}
 				if ($c>128) {
 					$byte |= 1<<(7-$data_bit);
+				} else {
+					$byte &= ~(1<<(7-$data_bit));
 				}	
 			}
 		}
