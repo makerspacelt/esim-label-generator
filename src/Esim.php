@@ -1,5 +1,7 @@
 <?php
 
+namespace Makerspacelt\EsimLabelGernerator;
+
 # ESim V7 Language
 
 class Esim {
