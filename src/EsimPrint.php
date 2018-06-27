@@ -1,6 +1,6 @@
 <?php
 
-include "esim.php";
+namespace Makerspacelt\EsimLabelGernerator;
 
 class EsimPrint {
 
