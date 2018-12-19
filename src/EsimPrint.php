@@ -58,11 +58,48 @@ class EsimPrint {
 		return $this->esim->getData();
 	}
 
+	public function printFile($file)
+	{
+		$mime = mime_content_type($file);
+		switch ($mime) {
+			case 'image/gif':
+				$img = imageCreateFromGif($file);
+				break;
+			case 'image/jpeg':
+				$img = imageCreateFromJpeg($file);
+				break;
+			case 'image/png':
+				$img = imageCreateFromPng($file);
+				break;
+			default:
+				$img = false;
+
+		}
+		if ($img) {
+			return $this->printGd($img);
+		} else {
+			return;
+		}
+	}
+
 	public function printPng($file)
 	{
 		$img=imageCreateFromPng($file);
 		return $this->printGd($img);
 	}
+
+	public function printJpeg($file)
+	{
+		$img=imageCreateFromJpeg($file);
+		return $this->printGd($img);
+	}
+
+	public function printGif($file)
+	{
+		$img=imageCreateFromGif($file);
+		return $this->printGd($img);
+	}
+
 }
 
 

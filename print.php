@@ -8,6 +8,6 @@ $ep = new Makerspacelt\EsimLabelGernerator\EsimPrint();
 
 array_shift($argv);
 foreach ($argv as $file) {
-	echo $ep->printPng($file);
+	echo $ep->printFile($file);
 }
 
