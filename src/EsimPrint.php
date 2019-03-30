@@ -16,7 +16,7 @@ class EsimPrint {
 		$this->esim->density(15);
 		$this->esim->speedSelect(4);
 		$this->esim->topOfFormBacup(true);
-		$this->esim->mediaFeedAdj(90);
+		$this->esim->mediaFeedAdj(100);
 		$this->esim->printDirectionTopBottom(false);
 		$this->esim->options('DN');
 		$this->esim->setupPrintCopy(1);
