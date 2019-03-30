@@ -53,7 +53,7 @@ class EsimPrint {
 			}
 		}
 
-		$this->esim->drawGraphics(10,10,$w,$h,$data);
+		$this->esim->drawGraphics(0,0,$w,$h,$data);
 		$this->esim->printLabel();
 		return $this->esim->getData();
 	}
