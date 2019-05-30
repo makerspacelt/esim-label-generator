@@ -50,9 +50,9 @@ class Esim {
 		$this->send("PF$len,$ctrl,$delay");
 	}
 
-	public function setFormLength($len, $gap=24)
+	public function setFormLength($len, $gap=24, $offset=0)
 	{
-		$this->send("Q$len,$gap");
+		$this->send("Q$len,$gap+$offset");
 	}
 
 	public function speedSelect($s=2)
