@@ -3,11 +3,16 @@
 		<form method="post" enctype="multipart/form-data">
 			<input type="file" name="img">
 			<input type="text" name="copies" value="1">
+			<input type="file" name="bin">
 			<input type="submit" value="Print">
 		</form>
 		<code>
 <?php
-if ( !empty($_FILES) && $_FILES['img']['error'] == 0 )
+if ( !empty($_FILES) && $_FILES['bin']['error'] == 0 )
+{
+	file_put_contents("/dev/usb/lp0", file_get_contents($_FILES['bin']['tmp_name']));
+}
+elseif ( !empty($_FILES) && $_FILES['img']['error'] == 0 )
 {
 	require_once "src/Esim.php";
 	require_once "src/EsimPrint.php";
