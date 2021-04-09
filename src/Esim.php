@@ -118,9 +118,9 @@ class Esim {
 		$this->send('N');
 	}
 
-	public function printLabel()
+	public function printLabel($count = 1)
 	{
-		$this->send('P1');
+		$this->send(sprintf('P%d',$count));
 	}
 
 	# ===== Render Commands

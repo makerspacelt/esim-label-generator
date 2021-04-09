@@ -5,10 +5,22 @@ namespace Makerspacelt\EsimLabelGernerator;
 class EsimPrint {
 
 	private $esim;
+	private $copies;
 
 	public function __construct()
 	{
 		$this->esim = new Esim();
+		$this->copies = 1;
+	}
+
+	public function setCopies($copies)
+	{
+		if ($copies >= 1 && $copies <= 100) {
+			$this->copies = (int)$copies;
+		} else {
+			$copies = 1;
+		}
+		$this->copies = $copies;
 	}
 
 	public function setupPrinter($w, $h)
@@ -54,7 +66,7 @@ class EsimPrint {
 		}
 
 		$this->esim->drawGraphics(0,0,$w,$h,$data);
-		$this->esim->printLabel();
+		$this->esim->printLabel($this->copies);
 		return $this->esim->getData();
 	}
 
