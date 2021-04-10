@@ -1,9 +1,12 @@
 <html>
 	<body>
 		<form method="post" enctype="multipart/form-data">
-			<input type="file" name="img">
-			<input type="text" name="copies" value="1">
-			<input type="file" name="bin">
+			<label for="img">Image:</label>
+			<input type="file" name="img"><br>
+			<label for="bin">Esim:</label>
+			<input type="file" name="bin"><br>
+			<label for="copies">Copies:</label>
+			<input type="text" name="copies" value="1"><br>
 			<input type="submit" value="Print">
 		</form>
 		<code>
