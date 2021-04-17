@@ -47,24 +47,31 @@ class EsimPrint {
 
 		$data="";
 		$byte=0;
+		$index=-1;
 		for ($y=0; $y<$h; $y++) {
 			for ($x=0; $x<$w; $x++) {
-				$i=imageColorAt($img, $x, $y);
-				$c=imageColorsForIndex($img, $i);
-				$c=($c['red']+$c['green']+$c['blue'])/3;
-				$data_bit=$x%8;
+				$data_bit=$x&7;
 				if ($data_bit == 0 && !($x==0 && $y==0) ) {
 					$data.=chr($byte&0xFF);
 					$byte=0xff;
 				}
-				if ($c>128) {
-					$byte |= 1<<(7-$data_bit);
-				} else {
+
+				$i=imageColorAt($img, $x, $y);
+				if ($index==$i) {
+					// nothing to do, skip to the next pixel
+					continue;
+				}
+
+				$c=imageColorsForIndex($img, $i);
+				$c=($c['red']+$c['green']+$c['blue'])>>2;
+
+				if ($c<128) {
 					$byte &= ~(1<<(7-$data_bit));
+				} else {
+					$index=$i;
 				}	
 			}
 		}
-
 		$this->esim->drawGraphics(0,0,$w,$h,$data);
 		$this->esim->printLabel($this->copies);
 		return $this->esim->getData();
