@@ -11,11 +11,27 @@
 		</form>
 		<code>
 <?php
-if ( !empty($_FILES) && $_FILES['bin']['error'] == 0 )
+
+if ( empty($_FILES) && !empty($_GET['url']) )
+{
+	$url = $_GET['url'];
+	if ( preg_match('~^https?://[^#]*.(gif)$~', $url) )
+	{
+		file_put_contents('/tmp/img.gif', file_get_contents($url, false, null, 0, 300000));
+		$_FILES['img'] = array(
+			'error' => 0,
+			'tmp_name' => '/tmp/img.gif',
+		);
+	} else {
+		echo "Error: invalid url. only gif links are supported.";
+	}
+}
+
+if ( !empty($_FILES) && $_FILES['bin']['error'] === 0 )
 {
 	file_put_contents("/dev/usb/lp0", file_get_contents($_FILES['bin']['tmp_name']));
 }
-elseif ( !empty($_FILES) && $_FILES['img']['error'] == 0 )
+elseif ( !empty($_FILES) && $_FILES['img']['error'] === 0 )
 {
 	require_once "src/Esim.php";
 	require_once "src/EsimPrint.php";
