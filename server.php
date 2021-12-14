@@ -1,4 +1,12 @@
 <html>
+	<head>
+		<style>
+			.file_button {
+				font-size:24px;
+				padding: 40px 100px;
+			}
+		</style>
+	</head>
 	<body>
 		<form method="post" enctype="multipart/form-data">
 			<label for="img">Image:</label>
@@ -8,7 +16,20 @@
 			<label for="copies">Copies:</label>
 			<input type="text" name="copies" value="1"><br>
 			<input type="submit" value="Print">
+			<hr>
+<?php
+	$files = scandir("/root/labels");
+	foreach ($files as $file) {
+		if ( preg_match('~^[a-zA-Z0-9_.-]*.(gif|png)$~', $file) ) {
+?>
+			<input class="file_button" type="submit" name="file" value="<?=$file?>">
+<?php
+		}
+	}
+?>
+			<hr>
 		</form>
+
 		<code>
 <?php
 
@@ -24,6 +45,19 @@ if ( empty($_FILES) && !empty($_GET['url']) )
 		);
 	} else {
 		echo "Error: invalid url. only gif links are supported.";
+	}
+}
+if ( !empty($_POST['file']) )
+{
+	$file = $_POST['file'];
+	if ( preg_match('~^[a-zA-Z0-9_.-]*.(gif|png)$~', $file) )
+	{
+		$_FILES['img'] = array(
+			'error' => 0,
+			'tmp_name' => "/root/labels/$file",
+		);
+	} else {
+		echo "hey! no cheating!";
 	}
 }
 
