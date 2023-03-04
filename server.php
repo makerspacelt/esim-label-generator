@@ -1,6 +1,18 @@
-<html>
+<?php
+if ($_SERVER['REQUEST_URI'] == '/my-foto.jpg') {
+	header('Content-Type: image/jpeg');
+	echo file_get_contents(__dir__ . '/my-foto.jpg');
+	exit;
+}
+?><html>
 	<head>
 		<style>
+			* {
+				font-size: 18px;
+			}
+			button, input[type="submit"] {
+				padding: 0.5rem;
+			}
 			.file_button {
 				font-size:24px;
 				padding: 40px 100px;
@@ -8,15 +20,19 @@
 		</style>
 	</head>
 	<body>
-		<form method="post" enctype="multipart/form-data">
-			<label for="img">Image:</label>
-			<input type="file" name="img"><br>
-			<label for="bin">Esim:</label>
-			<input type="file" name="bin"><br>
-			<label for="copies">Copies:</label>
-			<input type="text" name="copies" value="1"><br>
-			<input type="submit" value="Print">
+<div style="float:right;">
+  <img height="50%" src="/my-foto.jpg">
+</div>
+<p>
+  Upload a 780x1210 resolution JPEG / GIF image here and I will try to print a sticky label.
+</p>
+<form method="post" enctype="multipart/form-data">
+			<p><label>Image: <input type="file" name="img"></label></p>
+			<p><label>Esim: <input type="file" name="bin"></label></p>
+			<p><label for="copies">Copies: <input type="text" name="copies" value="1"></label></p>
+			<p><input type="submit" value="Print"></p>
 			<hr>
+			<p>Paruoštukai:</p>
 <?php
 	$files = scandir("/root/labels");
 	foreach ($files as $file) {
